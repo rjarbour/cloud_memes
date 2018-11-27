@@ -38,7 +38,7 @@ mlp = Model(layers=layers)
 # configure callbacks
 callbacks = Callbacks(mlp, eval_set=test)
 callbacks.add_callback(LossCallback(eval_set=test, epoch_freq=1))
-callbacks.add_callback(MetricCallback(eval_set=test, metric=Accuracy, epoch_freq=1))
+#callbacks.add_callback(MetricCallback(eval_set=test, metric=Accuracy, epoch_freq=1))
 
 # run fit
 mlp.fit(train, optimizer=optimizer, num_epochs=20, cost=cost, callbacks=callbacks)
