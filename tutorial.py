@@ -1,7 +1,7 @@
 from neon.callbacks.callbacks import Callbacks, LossCallback, MetricCallback
 from neon.data import CIFAR10
 from neon.initializers import Gaussian
-from neon.layers import GeneralizedCost, Affine
+from neon.layers import Affine, Conv, Pooling
 from neon.models import Model
 from neon.optimizers import Adam
 from neon.transforms import Rectlin, Softmax, CrossEntropyMulti, Misclassification, Accuracy
