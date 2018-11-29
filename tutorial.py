@@ -1,4 +1,4 @@
-from neon.callbacks.callbacks import Callbacks, LossCallback, MetricCallback
+from neon.callbacks.callbacks import Callbacks, LossCallback, MetricCallback, SerializeModelCallback
 from neon.data import CIFAR10
 from neon.initializers import Gaussian
 from neon.layers import Affine, Conv, Pooling, GeneralizedCost, Dropout
@@ -41,8 +41,9 @@ mlp = Model(layers=layers)
 # configure callbacks
 callbacks = Callbacks(mlp, eval_set=test)
 callbacks.add_callback(LossCallback(eval_set=test, epoch_freq=1))
+callbacks.add_callback(SerializeModelCallback(save_path="./model.prm"))
 callbacks.add_save_best_state_callback("./best_state.pkl")
-#callbacks.add_callback(MetricCallback(eval_set=test, metric=Accuracy, epoch_freq=1))
+callbacks.add_callback(MetricCallback(eval_set=test, metric=Accuracy(), epoch_freq=1))
 
 # run fit
 mlp.fit(train, optimizer=optimizer, num_epochs=20, cost=cost, callbacks=callbacks)
