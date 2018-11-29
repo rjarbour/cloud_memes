@@ -8,7 +8,7 @@ from neon.transforms import Rectlin, Softmax, CrossEntropyMulti, Misclassificati
 from neon import logger as neon_logger
 from neon.backends import gen_backend
 
-be = gen_backend(backend='gpu', batch_size=256)
+be = gen_backend(backend='gpu', batch_size=64)
 print(be)
 
 cifar10 = CIFAR10()
@@ -51,7 +51,7 @@ callbacks.add_save_best_state_callback("./best_state.pkl")
 
 
 # run fit
-mlp.fit(train, optimizer=optimizer, num_epochs=1, cost=cost, callbacks=callbacks)
+mlp.fit(train, optimizer=optimizer, num_epochs=50, cost=cost, callbacks=callbacks)
 
 error_rate = mlp.eval(test, metric=Misclassification())
 neon_logger.display("Train Accuracy - {}".format(100 * mlp.eval(test, metric=Accuracy())))
