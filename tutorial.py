@@ -41,6 +41,7 @@ mlp = Model(layers=layers)
 # configure callbacks
 callbacks = Callbacks(mlp, eval_set=test)
 callbacks.add_callback(LossCallback(eval_set=test, epoch_freq=1))
+callbacks.add_save_best_state_callback("./best_state.pkl")
 #callbacks.add_callback(MetricCallback(eval_set=test, metric=Accuracy, epoch_freq=1))
 
 # run fit
