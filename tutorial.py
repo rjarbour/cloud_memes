@@ -19,31 +19,31 @@ test = cifar10.valid_iter
 init_norm = Gaussian(loc=0.0, scale=0.01)
 
 # setup model layers
-layers = [Convolution((3,3,32), init=init_norm),
+layers = [Convolution((32,32,32), strides=3, init=init_norm),
           Activation(Rectlin()),
           BatchNorm(),
-          Convolution((3,3,32), init=init_norm),
+          Convolution((32,32,32), strides=3, init=init_norm),
           Activation(Rectlin()),
           BatchNorm(),
           Pooling(fshape=2, strides=2),
           Dropout(keep=0.2),
-          Convolution((3,3,64), init=init_norm),
+          Convolution((16,16,64), strides=3, init=init_norm),
           Activation(Rectlin()),
           BatchNorm(),
-          Convolution((3,3,64), init=init_norm),
+          Convolution((16,16,64), strides=3, init=init_norm),
           Activation(Rectlin()),
           BatchNorm(),
           Pooling(fshape=2, strides=2),
           Dropout(keep=0.3),
-          Convolution((3,3,128), init=init_norm),
+          Convolution((8,8,128), strides=3, init=init_norm),
           Activation(Rectlin()),
           BatchNorm(),
-          Convolution((3,3,128), init=init_norm),
+          Convolution((8,8,128), strides=3, init=init_norm),
           Activation(Rectlin()),
           BatchNorm(),
           Pooling(fshape=2, strides=2),
           Dropout(keep=0.4),
-          Linear(nout=1024, init=init_norm),
+          Linear(nout=2048, init=init_norm),
           Affine(nout=10, init=init_norm, activation=Softmax())]
 
 # setup cost function as CrossEntropy
