@@ -40,13 +40,14 @@ mlp = Model(layers=layers)
 
 # configure callbacks
 callbacks = Callbacks(mlp, eval_set=test)
-callbacks.add_callback(LossCallback(eval_set=test, epoch_freq=1))
+callbacks.add_callback(LossCallback(eval_set=train, epoch_freq=1))
 callbacks.add_callback(SerializeModelCallback(save_path="./model.prm"))
 callbacks.add_save_best_state_callback("./best_state.pkl")
-callbacks.add_callback(MetricCallback(eval_set=test, metric=Accuracy(), epoch_freq=1))
+callbacks.add_callback(MetricCallback(eval_set=train, metric=Accuracy(), epoch_freq=1))
 
 # run fit
-mlp.fit(train, optimizer=optimizer, num_epochs=20, cost=cost, callbacks=callbacks)
+mlp.fit(train, optimizer=optimizer, num_epochs=4, cost=cost, callbacks=callbacks)
 
 error_rate = mlp.eval(test, metric=Misclassification())
+neon_logger.display("Train Accuracy - {}".format(100 * model.eval(test, metric=Accuracy())))
 neon_logger.display('Misclassification error = %.1f%%' % (error_rate * 100))
