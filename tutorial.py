@@ -33,7 +33,7 @@ layers = [Convolution((3,3,32), strides=3, init=init_norm),
           Convolution((3,3,64), strides=3, init=init_norm),
           Activation(Rectlin()),
           BatchNorm(),
-          Pooling(fshape=2, strides=2)
+          Pooling(fshape=2, strides=2),
           Dropout(keep=0.3),
           Convolution((3,3,128), strides=3, init=init_norm),
           Activation(Rectlin()),
