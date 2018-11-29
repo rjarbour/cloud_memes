@@ -49,5 +49,5 @@ callbacks.add_callback(MetricCallback(eval_set=train, metric=Accuracy(), epoch_f
 mlp.fit(train, optimizer=optimizer, num_epochs=4, cost=cost, callbacks=callbacks)
 
 error_rate = mlp.eval(test, metric=Misclassification())
-neon_logger.display("Train Accuracy - {}".format(100 * model.eval(test, metric=Accuracy())))
+neon_logger.display("Train Accuracy - {}".format(100 * mlp.eval(test, metric=Accuracy())))
 neon_logger.display('Misclassification error = %.1f%%' % (error_rate * 100))
