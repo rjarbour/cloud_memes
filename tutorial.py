@@ -8,7 +8,7 @@ from neon.transforms import Rectlin, Softmax, CrossEntropyMulti, Misclassificati
 from neon import logger as neon_logger
 from neon.backends import gen_backend
 
-be = gen_backend(backend='mkl', batch_size=1024)
+be = gen_backend(backend='cpu', batch_size=1024)
 print(be)
 
 cifar10 = CIFAR10()
