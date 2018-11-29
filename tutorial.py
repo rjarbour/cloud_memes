@@ -1,15 +1,13 @@
 from neon.callbacks.callbacks import Callbacks, LossCallback, MetricCallback
 from neon.data import CIFAR10
 from neon.initializers import Gaussian
-from neon.layers import Affine, Conv, Pooling, GeneralizedCost
+from neon.layers import Affine, Conv, Pooling, GeneralizedCost, Dropout
 from neon.models import Model
 from neon.optimizers import Adam
 from neon.transforms import Rectlin, Softmax, CrossEntropyMulti, Misclassification, Accuracy
 from neon import logger as neon_logger
 from neon.backends import gen_backend
 
-be = gen_backend(backend='cpu', batch_size=128)
-print(be)
 
 cifar10 = CIFAR10()
 train = cifar10.train_iter
@@ -19,11 +17,14 @@ test = cifar10.valid_iter
 init_norm = Gaussian(loc=0.0, scale=0.01)
 
 # setup model layers
-layers = [Conv(fshape=(5,5,32), init=init_norm, activation=Rectlin()),
-          Pooling(fshape=2, strides=1),
-          Conv(fshape=(5,5,64), init=init_norm, activation=Rectlin()),
+layers = [Conv(fshape=(3,3,64), init=init_norm, activation=Rectlin()),
+          Pooling(fshape=2, strides=2),
+          Conv(fshape=(3,3,128), init=init_norm, activation=Rectlin()),
+          Pooling(fshape=2, strides=2),
+          Conv(fshape=(3,3,256), init=init_norm, activation=Rectlin()),
           Pooling(fshape=2, strides=2),
           Affine(nout=1024, init=init_norm, activation=Rectlin()),
+          Dropout(keep=0.5),
           Affine(nout=10, init=init_norm, activation=Softmax())]
 
 # setup cost function as CrossEntropy
