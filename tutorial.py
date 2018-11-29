@@ -43,7 +43,7 @@ layers = [Convolution((3,3,32), init=init_norm),
           BatchNorm(),
           Pooling(fshape=2, strides=2),
           Dropout(keep=0.4),
-          Linear(nout=1024, init=init_norm, activation=Rectlin()),
+          Linear(nout=1024, init=init_norm),
           Affine(nout=10, init=init_norm, activation=Softmax())]
 
 # setup cost function as CrossEntropy
