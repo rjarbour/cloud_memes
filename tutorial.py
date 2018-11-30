@@ -51,7 +51,7 @@ callbacks.add_save_best_state_callback("./best_state.pkl")
 
 
 # run fit
-mlp.fit(train, optimizer=optimizer, num_epochs=50, cost=cost, callbacks=callbacks)
+mlp.fit(train, optimizer=optimizer, num_epochs=100, cost=cost, callbacks=callbacks)
 
 error_rate = mlp.eval(test, metric=Misclassification())
 neon_logger.display("Train Accuracy - {}".format(100 * mlp.eval(test, metric=Accuracy())))
