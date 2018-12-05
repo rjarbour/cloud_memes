@@ -1,0 +1,3 @@
+
+. .venv/bin/activate
+python inference.py --config <path/to/config/file> --model_file frcn_model.prm --output results.prm
